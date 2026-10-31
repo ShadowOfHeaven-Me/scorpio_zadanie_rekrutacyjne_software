@@ -20,7 +20,7 @@ std::vector<std::pair<double, Point>> read_targets(const std::string& path) {
   std::string line;
   for (size_t number = 1; std::getline(file, line); ++number) {
     const auto where = path + ":" + std::to_string(number) + ": ";
-    line.erase(std::min(line.find('#'), line.size())); 
+    line.erase(std::min(line.find('#'), line.size()));
     if (line.find_first_not_of(" \t\r\n") == std::string::npos) {
       continue;
     }
