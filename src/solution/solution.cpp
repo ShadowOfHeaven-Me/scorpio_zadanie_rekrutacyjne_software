@@ -92,10 +92,12 @@ public:
                     msg.data = static_cast<int8_t>(bits_speed);
                 }*/
 
-                //float f = static_cast<float>(x) / 4096 * 360;
+                float f1 = static_cast<float>(last_x) / 4096 * 360;
+                float f2 = static_cast<float>(last_y) / 4096 * 360;
 
                 control_1->publish(msg);
-                //RCLCPP_INFO(get_logger(), "RotX: %.2f, Bits: %d", f, msg.data);
+                //RCLCPP_INFO(get_logger(), "RotX: %.2f, RotY: %.2f, Bits X: %d Bits Y: %d", f1, f2, msg.data);
+                RCLCPP_INFO(get_logger(), "RotX: %.2f, RotY: %.2f, Target X: %.2f, Target Y: %.2f", f1, f2, target_angle.rotX / M_PI * 180, target_angle.rotY / M_PI * 180);
 
                 last_x = x;
             });
@@ -128,10 +130,10 @@ public:
                  int clamped = std::clamp(static_cast<int>(std::round(raw_bit)), -128, 127);
                  msg.data = static_cast<int8_t>(clamped);
 
-                 float f = static_cast<float>(y) / 4096 * 360;
+                 //float f = static_cast<float>(y) / 4096 * 360;
 
                  control_2->publish(msg);
-                 RCLCPP_INFO(get_logger(), "RotY: %.2f, Bits: %d", f, msg.data);
+                 //RCLCPP_INFO(get_logger(), "RotY: %.2f, Bits: %d", f, msg.data);
 
                  last_y = y;
             });
